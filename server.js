@@ -2,16 +2,18 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 //route redirection
-const userRoute = require("./Routes/index")
+const userRoute = require("./Routes/user")
 app.use('/users', userRoute);
 // set port
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 app.listen(PORT, function () {
     console.log('Node app is running on port 3000');
 });

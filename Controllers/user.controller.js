@@ -1,54 +1,44 @@
 const dbConn = require("../db/config");
+const userModel = require("../Models/user.model")
 
 
 module.exports = {
     user: (req, res) => {
-        dbConn.query('SELECT * FROM users', function (error, results, fields) {
-            if (error) throw error;
-            return res.send({ error: false, data: results, message: 'users list.', success: true });
-        });
+        userModel.Alluser(req, res)
+
     },
     userWithId: (req, res) => {
         let user_id = req.params.id;
         if (!user_id) {
             return res.status(400).send({ error: true, message: 'Please provide user_id' });
         }
-        dbConn.query('SELECT * FROM users where id=?', user_id, function (error, results, fields) {
-            if (error) throw error;
-            return res.send({ error: false, data: results[0], message: 'users list.', success: true });
-        });
+        userModel.userWithId(req,res,user_id)
+        
     },
     newUser: (req, res) => {
         let user = req.body.user;
-        console.log(req.body, "fffffffff");
         if (!user) {
-            return res.status(400).send({ error: true, message: 'Please provide user' });
+            return res.status(400).send({ error: true, message: 'Please provide user', success: false });
         }
-        dbConn.query("INSERT INTO users SET ? ", { user: user }, function (error, results, fields) {
-            if (error) throw error;
-            return res.send({ error: false, data: results, message: 'New user has been created successfully.' });
-        });
+        userModel.newUSer(req,res,user)
+        
     },
     editUser: (req, res) => {
-        f
+
         let user_id = req.body.user_id;
         let user = req.body.user;
         if (!user_id || !user) {
             return res.status(400).send({ error: user, message: 'Please provide user and user_id' });
         }
-        dbConn.query("UPDATE users SET user = ? WHERE id = ?", [user, user_id], function (error, results, fields) {
-            if (error) throw error;
-            return res.send({ error: false, data: results, message: 'user has been updated successfully.' });
-        });
+        userModel.editUSer(req,res,user_id,user);
+     
     },
     deleteUser: (req, res) => {
         let user_id = req.body.user_id;
+        console.log(user_id, "user id");
         if (!user_id) {
             return res.status(400).send({ error: true, message: 'Please provide user_id' });
         }
-        dbConn.query('DELETE FROM users WHERE id = ?', [user_id], function (error, results, fields) {
-            if (error) throw error;
-            return res.send({ error: false, data: results, message: 'User has been updated successfully.' });
-        });
+     userModel.deleteUSer(req,res,user_id)
     }
 }
