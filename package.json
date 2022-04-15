@@ -12,7 +12,8 @@
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "razorpay": "^2.8.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

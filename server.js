@@ -3,15 +3,19 @@ var app = express();
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 const dotenv = require("dotenv");
+
 dotenv.config();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 //route redirection
 const userRoute = require("./Routes/user")
+const orderRoute=require("./Routes/order")
 app.use('/users', userRoute);
+app.use('/order',orderRoute);
 // set port
 const PORT = process.env.PORT
 app.listen(PORT, function () {
