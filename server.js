@@ -13,12 +13,12 @@ app.use(bodyParser.urlencoded({
 
 //route redirection
 const userRoute = require("./Routes/user")
-const orderRoute=require("./Routes/order")
+const orderRoute = require("./Routes/order")
 app.use('/users', userRoute);
-app.use('/order',orderRoute);
+app.use('/order', orderRoute);
 // set port
 const PORT = process.env.PORT
 app.listen(PORT, function () {
-    console.log('Node app is running on port 3000');
+    console.log(`Node app is running on port ${PORT}`);
 });
 module.exports = app;

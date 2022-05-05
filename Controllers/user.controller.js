@@ -17,7 +17,7 @@ module.exports = {
     newUser: (req, res) => {
         let user = req.body.user;
         if (!user) {
-            return res.status(400).send({ error: true, message: 'Please provide user', success: false });
+            return res.status(400).send({    error: true, message: 'Please provide user', success: false });
         }
         userModel.newUSer(req, res, user)
 
